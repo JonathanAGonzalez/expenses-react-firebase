@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { Helmet } from 'react-helmet-async';
+import Button from './elements/Button';
+import {
+  Header,
+  ContainerButtons,
+  ContainerHeader,
+  Title,
+} from './elements/Header';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Helmet>
+        <title>Bienvenido Jonas</title>
+      </Helmet>
+      <Header>
+        <ContainerHeader>
+          <div>
+            <Title>Agendá tus gastos</Title>
+          </div>
+        </ContainerHeader>
+        <ContainerButtons>
+          <Button to="/categorias">Categorías</Button>
+          <Button to="/listado-gastos">Listado de gastos</Button>
+          <Button to="x"></Button>
+        </ContainerButtons>
+      </Header>
+    </>
   );
 }
 
