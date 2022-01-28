@@ -21,6 +21,7 @@ const SignUp = () => {
 
   const [values, setValues] = useState(initialState);
   const { email, password, passwordConfirm } = values;
+  const [error, setError] = useState({});
 
   const handleChange = (e) => {
     const target = e.target;
@@ -29,7 +30,24 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submit');
+    let err = {};
+    setError({});
+    const ex = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/;
+    const emailIsValid = ex.test(email);
+    if (!emailIsValid) {
+      err.email = 'Email is not valid';
+      setError(err);
+    }
+    if (password.length < 6 || password === '') {
+      err.password = 'Password must be at least 6 characters';
+      setError(err);
+    }
+    if (password !== passwordConfirm) {
+      err.passwordConfirm = 'Passwords do not match';
+      setError(err);
+    }
+
+    console.log('registrado');
   };
 
   return (
@@ -52,6 +70,7 @@ const SignUp = () => {
           onChange={handleChange}
           value={email}
         />
+        <p>{error.email}</p>
         <Input
           type="password"
           name="password"
@@ -59,6 +78,7 @@ const SignUp = () => {
           onChange={handleChange}
           value={password}
         />
+        <p>{error.password}</p>
         <Input
           type="password"
           name="passwordConfirm"
@@ -66,6 +86,8 @@ const SignUp = () => {
           onChange={handleChange}
           value={passwordConfirm}
         />
+        <p>{error.passwordConfirm}</p>
+
         <ContainerButton>
           <Button as="button" type="submit" to="/">
             Crear cuenta
