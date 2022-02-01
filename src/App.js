@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import BtnSignOut from './elements/BtnSignOut';
 import Button from './elements/Button';
 import {
   Header,
@@ -22,7 +23,7 @@ function App() {
         <ContainerButtons>
           <Button to="/categorias">Categorías</Button>
           <Button to="/listado-gastos">Listado de gastos</Button>
-          <Button to="x"></Button>
+          <BtnSignOut />
         </ContainerButtons>
       </Header>
     </>

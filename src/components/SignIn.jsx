@@ -1,16 +1,26 @@
-import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
+import styled from 'styled-components';
+import useForm from '../hooks/useForm';
+import { ReactComponent as SvgLogin } from '../assets/images/login.svg';
 import { Header, Title } from '../elements/Header';
 import { ContainerButton, Form, Input } from '../elements/ElementsForm';
-import { ReactComponent as SvgLogin } from '../assets/images/login.svg';
 import Button from '../elements/Button';
+import Error from '../elements/WarningForm';
+import Alert from '../elements/Alert';
 
 const Svg = styled(SvgLogin)`
   width: 100%;
   max-height: 12.24rem;
   margin-bottom: 1.25rem;
 `;
+
 const SignIn = () => {
+  const { values, errorFirebase, error, handleChange, loginUser } = useForm({
+    email: '',
+    password: '',
+  });
+
+  console.log(error);
   return (
     <>
       <Helmet>
@@ -22,10 +32,26 @@ const SignIn = () => {
           <Button to="/crear-cuenta">Crear Cuenta</Button>
         </div>
       </Header>
-      <Form>
+
+      <Form onSubmit={loginUser}>
+        {errorFirebase && <Alert type="error" msg={errorFirebase} />}
         <Svg />
-        <Input type="email" name="email" placeholder="Correo electrónico" />
-        <Input type="password" name="password" placeholder="Contraseña" />
+        <Input
+          onChange={handleChange}
+          type="email"
+          name="email"
+          placeholder="Correo electrónico"
+          input={values.email}
+        />
+        {error.email && <Error msg={error.email} />}
+        <Input
+          onChange={handleChange}
+          type="password"
+          name="password"
+          placeholder="Contraseña"
+          input={values.password}
+        />
+        {error.password && <Error msg={error.password} />}
         <ContainerButton>
           <Button as="button" type="submit" to="/">
             Iniciar sesión

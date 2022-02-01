@@ -15,6 +15,7 @@ const Button = styled(Link)`
   text-decoration: none;
   display: inline-flex;
   justify-content: space-between;
+  text-align: center;
   align-items: center;
   outline: none;
   transition: 0.5s;

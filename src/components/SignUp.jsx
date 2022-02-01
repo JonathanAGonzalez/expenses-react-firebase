@@ -1,10 +1,12 @@
-import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import useForm from '../hooks/useForm';
 import styled from 'styled-components';
+import Button from '../elements/Button';
+import Alert from '../elements/Alert';
+import Error from '../elements/WarningForm';
 import { Header, Title } from '../elements/Header';
 import { ContainerButton, Form, Input } from '../elements/ElementsForm';
 import { ReactComponent as SvgRegister } from '../assets/images/register.svg';
-import Button from '../elements/Button';
 
 const Svg = styled(SvgRegister)`
   width: 100%;
@@ -13,42 +15,9 @@ const Svg = styled(SvgRegister)`
 `;
 
 const SignUp = () => {
-  const initialState = {
-    email: '',
-    password: '',
-    passwordConfirm: '',
-  };
-
-  const [values, setValues] = useState(initialState);
+  const { errorFirebase, values, error, handleSubmit, handleChange } =
+    useForm();
   const { email, password, passwordConfirm } = values;
-  const [error, setError] = useState({});
-
-  const handleChange = (e) => {
-    const target = e.target;
-    setValues({ ...values, [target.name]: target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let err = {};
-    setError({});
-    const ex = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/;
-    const emailIsValid = ex.test(email);
-    if (!emailIsValid) {
-      err.email = 'Email is not valid';
-      setError(err);
-    }
-    if (password.length < 6 || password === '') {
-      err.password = 'Password must be at least 6 characters';
-      setError(err);
-    }
-    if (password !== passwordConfirm) {
-      err.passwordConfirm = 'Passwords do not match';
-      setError(err);
-    }
-
-    console.log('registrado');
-  };
 
   return (
     <>
@@ -61,6 +30,7 @@ const SignUp = () => {
           <Button to="/iniciar-sesion">Iniciar sesión</Button>
         </div>
       </Header>
+      {errorFirebase && <Alert type="error" msg={errorFirebase} />}
       <Form onSubmit={handleSubmit}>
         <Svg />
         <Input
@@ -70,7 +40,9 @@ const SignUp = () => {
           onChange={handleChange}
           value={email}
         />
-        <p>{error.email}</p>
+        {errorFirebase && <Alert type="error" msg={errorFirebase} />}
+
+        {error.email && <Error msg={error.email} />}
         <Input
           type="password"
           name="password"
@@ -78,7 +50,8 @@ const SignUp = () => {
           onChange={handleChange}
           value={password}
         />
-        <p>{error.password}</p>
+        {error.password && <Error msg={error.password} />}
+
         <Input
           type="password"
           name="passwordConfirm"
@@ -86,7 +59,7 @@ const SignUp = () => {
           onChange={handleChange}
           value={passwordConfirm}
         />
-        <p>{error.passwordConfirm}</p>
+        {error.passwordConfirm && <Error msg={error.passwordConfirm} />}
 
         <ContainerButton>
           <Button as="button" type="submit" to="/">
