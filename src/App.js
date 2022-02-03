@@ -1,12 +1,13 @@
-import { Helmet } from 'react-helmet-async';
-import BtnSignOut from './elements/BtnSignOut';
-import Button from './elements/Button';
+import { Helmet } from "react-helmet-async";
+import AddExpenses from "./components/AddExpenses";
+import BtnSignOut from "./elements/BtnSignOut";
+import Button from "./elements/Button";
 import {
   Header,
   ContainerButtons,
   ContainerHeader,
   Title,
-} from './elements/Header';
+} from "./elements/Header";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       <Header>
         <ContainerHeader>
           <div>
-            <Title>Agendá tus gastos</Title>
+            <Title>Agregá tus gastos</Title>
           </div>
         </ContainerHeader>
         <ContainerButtons>
@@ -26,6 +27,7 @@ function App() {
           <BtnSignOut />
         </ContainerButtons>
       </Header>
+      <AddExpenses />
     </>
   );
 }
