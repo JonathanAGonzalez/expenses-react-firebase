@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import Button from "../elements/Button";
 import {
@@ -7,6 +8,7 @@ import {
   InputBig,
   ContainerButton,
 } from "../elements/ElementsForm";
+import SelectCategories from "../elements/SelectCategories";
 import useForm from "../hooks/useForm";
 
 const AddExpenses = () => {
@@ -14,11 +16,12 @@ const AddExpenses = () => {
     value: "",
     description: "",
   });
+  const [category, setCategory] = useState("hogar");
 
   return (
     <Form>
       <ContainerFilters>
-        <p>Select</p>
+        <SelectCategories category={category} setCategory={setCategory} />
         <p>datepickeer</p>
       </ContainerFilters>
       <div>
