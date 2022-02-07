@@ -6,16 +6,15 @@ import {
   Options,
   OptionSelect,
 } from "./ElementsOptions";
+import IconCategory from "./IconCategory";
 
 const categories = [
-  { id: "comida", text: "Comida" },
-  { id: "cuentas y pagos", text: "Cuentas y pagos" },
-  { id: "hogar", text: "Hogar" },
-  { id: "transporte", text: "Transporte" },
-  { id: "ropa", text: "Ropa" },
-  { id: "salud e higiene", text: "Salud e Higiene" },
-  { id: "compras", text: "Compras" },
-  { id: "diversion", text: "Diversion" },
+  { id: "food", text: "Comida" },
+  { id: "billsPayments", text: "Cuentas-pagos" },
+  { id: "home", text: "Hogar" },
+  { id: "transport", text: "Transporte" },
+  { id: "healt", text: "Salud e Higiene" },
+  { id: "buys", text: "Compras" },
 ];
 
 const SelectCategories = ({ category, setCategory }) => {
@@ -29,7 +28,11 @@ const SelectCategories = ({ category, setCategory }) => {
       {showSelect && (
         <Options>
           {categories.map((category) => (
-            <Option key={category.id} onClick={() => setCategory(category.id)}>
+            <Option
+              key={category.id}
+              onClick={() => setCategory(category.text)}
+            >
+              <IconCategory id={category.id} />
               {category.text}
             </Option>
           ))}

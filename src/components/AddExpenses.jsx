@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
+import DatePicker from "./DatePicker";
 import Button from "../elements/Button";
 import {
   ContainerFilters,
@@ -10,19 +11,26 @@ import {
 } from "../elements/ElementsForm";
 import SelectCategories from "../elements/SelectCategories";
 import useForm from "../hooks/useForm";
-
+const dateNew = new Date();
 const AddExpenses = () => {
+  const [category, setCategory] = useState("hogar");
+  const [date, setDate] = useState(dateNew);
   const { values, handleChange } = useForm({
     value: "",
     description: "",
+    category,
   });
-  const [category, setCategory] = useState("hogar");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const expenses = { ...values, category };
+    console.log(expenses);
+  };
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <ContainerFilters>
         <SelectCategories category={category} setCategory={setCategory} />
-        <p>datepickeer</p>
+        <DatePicker currentDate={date} setDate={setDate} />
       </ContainerFilters>
       <div>
         <Input
