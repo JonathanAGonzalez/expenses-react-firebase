@@ -1,29 +1,41 @@
-import { useState } from "react";
-import { IoMdAdd } from "react-icons/io";
-import DatePicker from "./DatePicker";
-import Button from "../elements/Button";
+import { useState } from 'react';
+import fromUnixTime from 'date-fns/fromUnixTime';
+import getUnixTime from 'date-fns/getUnixTime';
+import { IoMdAdd } from 'react-icons/io';
+import DatePicker from './DatePicker';
+import Button from '../elements/Button';
 import {
   ContainerFilters,
   Form,
   Input,
   InputBig,
   ContainerButton,
-} from "../elements/ElementsForm";
-import SelectCategories from "../elements/SelectCategories";
-import useForm from "../hooks/useForm";
+} from '../elements/ElementsForm';
+import SelectCategories from '../elements/SelectCategories';
+import useForm from '../hooks/useForm';
+import addExpense from '../firesbase/addExpense';
+import useUserContext from '../hooks/useUserContext';
 const dateNew = new Date();
+
 const AddExpenses = () => {
-  const [category, setCategory] = useState("hogar");
+  const idUser = useUserContext().stateUserContext.uid;
+  const [category, setCategory] = useState('hogar');
   const [date, setDate] = useState(dateNew);
   const { values, handleChange } = useForm({
-    value: "",
-    description: "",
+    value: '',
+    description: '',
     category,
   });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const expenses = { ...values, category };
-    console.log(expenses);
+    const expenses = { ...values, category, date: getUnixTime(date), idUser };
+
+    const { value, description, category: cat } = expenses;
+
+    if (value !== '' && description !== '' && cat !== '') {
+      addExpense({ ...expenses, value: parseFloat(value).toFixed(2) });
+    }
   };
 
   return (

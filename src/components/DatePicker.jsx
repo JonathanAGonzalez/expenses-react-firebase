@@ -1,14 +1,15 @@
-import styled from "styled-components";
-import DayPickerInput from "react-day-picker/DayPickerInput";
-import { DateUtils } from "react-day-picker";
-import "react-day-picker/lib/style.css";
-import dateFnsFormat from "date-fns/format";
-import dateFnsParse from "date-fns/parse";
-import theme from "../theme";
+import styled from 'styled-components';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import { es } from 'date-fns/locale';
+import { DateUtils } from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
+import dateFnsFormat from 'date-fns/format';
+import dateFnsParse from 'date-fns/parse';
+import theme from '../theme';
 
 const ContainerInput = styled.div`
   input {
-    font-family: "Work Sans", sans-serif;
+    font-family: 'Work Sans', sans-serif;
     box-sizing: border-box;
     background: ${theme.lightGray};
     border: none;
@@ -32,22 +33,28 @@ const ContainerInput = styled.div`
   }
 `;
 
-function parseDate(str, format, locale) {
-  const parsed = dateFnsParse(str, format, new Date(), { locale });
+function parseDate(str, format) {
+  const parsed = dateFnsParse(str, format, new Date(), { locale: es });
   if (DateUtils.isDate(parsed)) {
     return parsed;
   }
   return undefined;
 }
 
-function formatDate(date, format, locale) {
-  return dateFnsFormat(date, format, { locale });
+function formatDate(date, format) {
+  return dateFnsFormat(date, format, { locale: es });
 }
 
 const DatePicker = ({ currentDate, setDate }) => {
   return (
     <ContainerInput>
-      <DayPickerInput value={currentDate} onDayChange={(day) => setDate(day)} />
+      <DayPickerInput
+        value={currentDate}
+        onDayChange={(day) => setDate(day)}
+        format="dd 'de' MMMM 'de' yyyy"
+        formatDate={formatDate}
+        parseDate={parseDate}
+      />
     </ContainerInput>
   );
 };
