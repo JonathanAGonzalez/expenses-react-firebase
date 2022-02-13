@@ -13,7 +13,6 @@ const iconsCategories = {
 };
 
 const IconCategory = ({ id }) => {
-  console.log(id);
   return <>{iconsCategories[id]}</>;
 };
 

@@ -45,7 +45,6 @@ const useForm = (valuesForm = initialState) => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      console.log('Creado');
       navigate('/');
     } catch ({ code }) {
       switch (code) {

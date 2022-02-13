@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import fromUnixTime from 'date-fns/fromUnixTime';
 import getUnixTime from 'date-fns/getUnixTime';
 import { IoMdAdd } from 'react-icons/io';
 import {
@@ -21,14 +20,14 @@ const dateNew = new Date();
 
 const AddExpenses = () => {
   const idUser = useUserContext().stateUserContext.uid;
-  const [category, setCategory] = useState('home');
+  const [category, setCategory] = useState({ id: 'home', text: 'Hogar' });
   const [date, setDate] = useState(dateNew);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const initialState = {
     value: '',
     description: '',
-    category,
+    category: category.id,
   };
   const { values, handleChange, setValues } = useForm(initialState);
 
@@ -37,8 +36,6 @@ const AddExpenses = () => {
     const expenses = { ...values, category, date: getUnixTime(date), idUser };
 
     const { value, description, category: cat } = expenses;
-
-    console.log(category);
 
     if (value !== '' && description !== '' && cat !== '') {
       setLoading(true);

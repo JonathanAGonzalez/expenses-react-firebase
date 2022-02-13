@@ -22,13 +22,18 @@ const SelectCategories = ({ category, setCategory }) => {
   return (
     <ContainerSelect onClick={() => setShowSelect(!showSelect)}>
       <OptionSelect>
-        {category}
+        {category.text}
         <AiFillCaretDown />
       </OptionSelect>
       {showSelect && (
         <Options>
           {categories.map((category) => (
-            <Option key={category.id} onClick={() => setCategory(category.id)}>
+            <Option
+              key={category.id}
+              onClick={() =>
+                setCategory({ id: category.id, text: category.text })
+              }
+            >
               <IconCategory id={category.id} />
               {category.text}
             </Option>

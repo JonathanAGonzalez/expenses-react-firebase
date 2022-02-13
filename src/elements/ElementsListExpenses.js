@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import theme from '../theme';
 
 const List = styled.ul`
   list-style: none;
@@ -100,7 +99,7 @@ const Value = styled.div`
   }
 `;
 
-const Fecha = styled.div`
+const Date = styled.div`
   border-radius: 0.31rem; /* 5px */
   background: blue;
   text-align: center;
@@ -208,7 +207,7 @@ export {
   Category,
   Description,
   Value,
-  Fecha,
+  Date,
   ContainerButtons,
   ButtonAction,
   ButtonMore,

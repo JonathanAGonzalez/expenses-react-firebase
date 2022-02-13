@@ -10,6 +10,8 @@ import {
   orderBy,
   where,
   limit,
+  startAfter,
+  deleteDoc,
 } from 'firebase/firestore';
 import {
   getAuth,
@@ -35,11 +37,13 @@ const db = getFirestore();
 export {
   auth,
   db,
+  startAfter,
   query,
   orderBy,
   where,
   limit,
   addDoc,
+  deleteDoc,
   collection,
   doc,
   createUserWithEmailAndPassword,

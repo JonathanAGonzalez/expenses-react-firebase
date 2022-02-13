@@ -1,9 +1,11 @@
+import { Fragment } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Header, Title } from '../elements/Header';
 import BtnBack from '../elements/BtnBack';
 import TotalExpenses from './TotalExpenses';
 import useGetExpenses from '../hooks/useGetExpenses';
+import deleteExpense from '../firesbase/deleteExpense';
 import {
   List,
   ElementList,
@@ -13,7 +15,7 @@ import {
   Category,
   Description,
   Value,
-  Fecha,
+  Date,
   ContainerButtons,
   ButtonAction,
   ButtonMore,
@@ -26,9 +28,15 @@ import IconCategory from '../elements/IconCategory';
 import formattedPrice from '../hooks/formattedPrice';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import Button from '../elements/Button';
+import { formattedDate, sameDates } from '../hooks/formattedDate';
 
 const ListExpenses = () => {
-  const { loading, expenses } = useGetExpenses();
+  const {
+    expenses,
+    expenses: data,
+    moreToLoad,
+    getMoreExpenses,
+  } = useGetExpenses();
 
   return (
     <>
@@ -40,35 +48,46 @@ const ListExpenses = () => {
         <Title>Listado de gastos</Title>
       </Header>
 
-      {loading ? (
+      {expenses.loading ? (
         <ContainerLoading>
           <Loading />
         </ContainerLoading>
       ) : (
         <List>
-          {expenses.map((expense) => (
-            <ElementList key={expense.id}>
-              <Category>
-                <IconCategory id={expense.category} />
-                {expense.category}
-              </Category>
-              <Description>{expense.description}</Description>
-              <Value>{formattedPrice(expense.value)}</Value>
-              <ContainerButtons>
-                <ButtonAction as={Link} to={`/editar-gasto/${expense.id}`}>
-                  <AiFillEdit />
-                </ButtonAction>
-                <ButtonAction>
-                  <AiFillDelete />
-                </ButtonAction>
-              </ContainerButtons>
-            </ElementList>
-          ))}
-          <ContainerButtonCenter>
-            <ButtonMore>Cargar más...</ButtonMore>
-          </ContainerButtonCenter>
+          {data.expenses.map(
+            ({ category, date, value, id, description }, index) => (
+              <div key={id}>
+                {!sameDates(data.expenses, index, date) && (
+                  <Date>{formattedDate(date)}</Date>
+                )}
+                {console.log('aca', id)}
 
-          {expenses.length === 0 && (
+                <ElementList>
+                  <Category>
+                    <IconCategory id={category.id} />
+                    {category.text}
+                  </Category>
+                  <Description>{description}</Description>
+                  <Value>{formattedPrice(value)}</Value>
+                  <ContainerButtons>
+                    <ButtonAction as={Link} to={`/editar-gasto/${id}`}>
+                      <AiFillEdit />
+                    </ButtonAction>
+                    <ButtonAction onClick={() => deleteExpense(id)}>
+                      <AiFillDelete />
+                    </ButtonAction>
+                  </ContainerButtons>
+                </ElementList>
+              </div>
+            )
+          )}
+          {moreToLoad && (
+            <ContainerButtonCenter>
+              <ButtonMore onClick={getMoreExpenses}>Cargar más...</ButtonMore>
+            </ContainerButtonCenter>
+          )}
+
+          {data.expenses.length === 0 && (
             <ContainerSub>
               <Subtitle>No hay más gastos por mostrar</Subtitle>
               <Button to="/">Agregar gastos</Button>
