@@ -5,6 +5,11 @@ import {
   doc,
   addDoc,
   collection,
+  onSnapshot,
+  query,
+  orderBy,
+  where,
+  limit,
 } from 'firebase/firestore';
 import {
   getAuth,
@@ -30,12 +35,17 @@ const db = getFirestore();
 export {
   auth,
   db,
+  query,
+  orderBy,
+  where,
+  limit,
   addDoc,
   collection,
   doc,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  onSnapshot,
   signOut,
   setDoc,
 };

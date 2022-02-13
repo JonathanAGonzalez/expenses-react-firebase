@@ -1,13 +1,14 @@
-import { Helmet } from "react-helmet-async";
-import AddExpenses from "./components/AddExpenses";
-import BtnSignOut from "./elements/BtnSignOut";
-import Button from "./elements/Button";
+import { Helmet } from 'react-helmet-async';
+import AddExpenses from './components/AddExpenses';
+import TotalExpenses from './components/TotalExpenses';
+import BtnSignOut from './elements/BtnSignOut';
+import Button from './elements/Button';
 import {
   Header,
   ContainerButtons,
   ContainerHeader,
   Title,
-} from "./elements/Header";
+} from './elements/Header';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         </ContainerButtons>
       </Header>
       <AddExpenses />
+      <TotalExpenses />
     </>
   );
 }

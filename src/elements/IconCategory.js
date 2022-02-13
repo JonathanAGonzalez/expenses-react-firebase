@@ -1,7 +1,7 @@
-import { MdFoodBank, MdPayments } from "react-icons/md";
-import { GiHealthNormal, GiBuyCard } from "react-icons/gi";
-import { AiFillHome } from "react-icons/ai";
-import { FaBus } from "react-icons/fa";
+import { MdFoodBank, MdPayments } from 'react-icons/md';
+import { GiHealthNormal, GiBuyCard } from 'react-icons/gi';
+import { AiFillHome } from 'react-icons/ai';
+import { FaBus } from 'react-icons/fa';
 
 const iconsCategories = {
   food: <MdFoodBank />,
@@ -13,6 +13,7 @@ const iconsCategories = {
 };
 
 const IconCategory = ({ id }) => {
+  console.log(id);
   return <>{iconsCategories[id]}</>;
 };
 

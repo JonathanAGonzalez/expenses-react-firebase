@@ -2,8 +2,6 @@ import { useState } from 'react';
 import fromUnixTime from 'date-fns/fromUnixTime';
 import getUnixTime from 'date-fns/getUnixTime';
 import { IoMdAdd } from 'react-icons/io';
-import DatePicker from './DatePicker';
-import Button from '../elements/Button';
 import {
   ContainerFilters,
   Form,
@@ -11,21 +9,28 @@ import {
   InputBig,
   ContainerButton,
 } from '../elements/ElementsForm';
+import Button from '../elements/Button';
+import Loading from '../elements/Loading';
+import Alert from '../elements/Alert';
 import SelectCategories from '../elements/SelectCategories';
+import DatePicker from './DatePicker';
 import useForm from '../hooks/useForm';
-import addExpense from '../firesbase/addExpense';
 import useUserContext from '../hooks/useUserContext';
+import addExpense from '../firesbase/addExpense';
 const dateNew = new Date();
 
 const AddExpenses = () => {
   const idUser = useUserContext().stateUserContext.uid;
-  const [category, setCategory] = useState('hogar');
+  const [category, setCategory] = useState('home');
   const [date, setDate] = useState(dateNew);
-  const { values, handleChange } = useForm({
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const initialState = {
     value: '',
     description: '',
     category,
-  });
+  };
+  const { values, handleChange, setValues } = useForm(initialState);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,13 +38,29 @@ const AddExpenses = () => {
 
     const { value, description, category: cat } = expenses;
 
+    console.log(category);
+
     if (value !== '' && description !== '' && cat !== '') {
-      addExpense({ ...expenses, value: parseFloat(value).toFixed(2) });
+      setLoading(true);
+      addExpense({ ...expenses, value: parseFloat(value).toFixed(2) }).then(
+        () => {
+          setLoading(false);
+          setError(false);
+          setValues(initialState);
+          setDate(dateNew);
+        }
+      );
+    } else {
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
     }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
+      {error && <Alert type="error" msg="Los campos son obligatorios" />}
       <ContainerFilters>
         <SelectCategories category={category} setCategory={setCategory} />
         <DatePicker currentDate={date} setDate={setDate} />
@@ -63,10 +84,14 @@ const AddExpenses = () => {
         />
       </div>
       <ContainerButton>
-        <Button as="button" type="submit" primary conIcono>
-          Agregar Gasto
-          <IoMdAdd />
-        </Button>
+        {!loading ? (
+          <Button as="button" type="submit" primary conIcono>
+            Agregar Gasto
+            <IoMdAdd />
+          </Button>
+        ) : (
+          <Loading />
+        )}
       </ContainerButton>
     </Form>
   );
