@@ -32,11 +32,13 @@ import { formattedDate, sameDates } from '../hooks/formattedDate';
 
 const ListExpenses = () => {
   const {
-    expenses,
+    expenses: { loading },
     expenses: data,
     moreToLoad,
     getMoreExpenses,
   } = useGetExpenses();
+
+  //console.log(data);
 
   return (
     <>
@@ -48,7 +50,7 @@ const ListExpenses = () => {
         <Title>Listado de gastos</Title>
       </Header>
 
-      {expenses.loading ? (
+      {loading ? (
         <ContainerLoading>
           <Loading />
         </ContainerLoading>
@@ -60,8 +62,6 @@ const ListExpenses = () => {
                 {!sameDates(data.expenses, index, date) && (
                   <Date>{formattedDate(date)}</Date>
                 )}
-                {console.log('aca', id)}
-
                 <ElementList>
                   <Category>
                     <IconCategory id={category.id} />

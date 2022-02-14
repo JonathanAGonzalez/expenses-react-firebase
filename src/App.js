@@ -9,12 +9,15 @@ import {
   ContainerHeader,
   Title,
 } from './elements/Header';
+import useUserContext from './hooks/useUserContext';
 
 function App() {
+  const { stateUserContext } = useUserContext();
+  console.log(stateUserContext);
   return (
     <>
       <Helmet>
-        <title>Bienvenido Jonas</title>
+        <title>Bienvenido {stateUserContext.email}</title>
       </Helmet>
       <Header>
         <ContainerHeader>

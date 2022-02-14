@@ -101,7 +101,7 @@ const Value = styled.div`
 
 const Date = styled.div`
   border-radius: 0.31rem; /* 5px */
-  background: blue;
+  background: #e0607e;
   text-align: center;
   color: #fff;
   padding: 0.62rem 3.12rem; /* 10px 50px */

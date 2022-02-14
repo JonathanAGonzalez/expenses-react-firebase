@@ -13,6 +13,7 @@ import useUserContext from './useUserContext';
 
 const useGetExpenses = () => {
   const [expenses, setExpenses] = useState({ loading: true, expenses: [] });
+
   const [lastExpense, setLastExpense] = useState(null);
   const [moreToLoad, setMoreToLoad] = useState(false);
 
@@ -45,25 +46,25 @@ const useGetExpenses = () => {
       collection(db, 'expenses'),
       where('idUser', '==', user.uid),
       orderBy('date', 'desc'),
-      limit(10)
+      limit(5)
     );
 
     const unsuscribe = onSnapshot(queries, (data) => {
+      const state = [];
       if (data.docs.length > 0) {
         setLastExpense(data.docs[data.docs.length - 1]);
         setMoreToLoad(true);
       } else {
         setMoreToLoad(false);
       }
-      // const newExpenses = data
-      //   .docChanges()
-      //   .map((expense) => ({ ...expense.doc.data(), id: expense.doc.id }));
+
+      data.docs.forEach((doc) => {
+        state.push({ ...doc.data(), id: doc.id });
+      });
 
       setExpenses({
         loading: false,
-        expenses: data
-          .docChanges()
-          .map((expense) => ({ ...expense.doc.data(), id: expense.doc.id })),
+        expenses: state,
       });
     });
 
