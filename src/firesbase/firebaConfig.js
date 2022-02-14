@@ -4,6 +4,9 @@ import {
   setDoc,
   doc,
   addDoc,
+  deleteDoc,
+  getDoc,
+  updateDoc,
   collection,
   onSnapshot,
   query,
@@ -11,7 +14,6 @@ import {
   where,
   limit,
   startAfter,
-  deleteDoc,
 } from 'firebase/firestore';
 import {
   getAuth,
@@ -43,7 +45,9 @@ export {
   where,
   limit,
   addDoc,
+  getDoc,
   deleteDoc,
+  updateDoc,
   collection,
   doc,
   createUserWithEmailAndPassword,

@@ -10,7 +10,7 @@ const loadingAnimation = keyframes`
 
 `;
 
-const ContainerLoading = styled.div`
+export const ContainerLoading = styled.div`
   position: relative;
   div {
     width: 82px;

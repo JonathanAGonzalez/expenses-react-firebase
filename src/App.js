@@ -13,7 +13,7 @@ import useUserContext from './hooks/useUserContext';
 
 function App() {
   const { stateUserContext } = useUserContext();
-  console.log(stateUserContext);
+
   return (
     <>
       <Helmet>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import getUnixTime from 'date-fns/getUnixTime';
 import { IoMdAdd } from 'react-icons/io';
 import {
@@ -16,20 +16,35 @@ import DatePicker from './DatePicker';
 import useForm from '../hooks/useForm';
 import useUserContext from '../hooks/useUserContext';
 import addExpense from '../firesbase/addExpense';
+import { useNavigate } from 'react-router-dom';
+import editExpense from '../firesbase/editExpense';
+import fromUnixTime from 'date-fns/fromUnixTime';
+
 const dateNew = new Date();
 
-const AddExpenses = () => {
+const AddExpenses = ({ expense }) => {
   const idUser = useUserContext().stateUserContext.uid;
   const [category, setCategory] = useState({ id: 'home', text: 'Hogar' });
   const [date, setDate] = useState(dateNew);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+
   const initialState = {
     value: '',
     description: '',
     category: category.id,
   };
+
   const { values, handleChange, setValues } = useForm(initialState);
+  const expensesEdit = {
+    ...values,
+    category,
+    date: getUnixTime(date),
+    idUser,
+    id: expense?.id,
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +60,10 @@ const AddExpenses = () => {
           setError(false);
           setValues(initialState);
           setDate(dateNew);
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+          }, 2000);
         }
       );
     } else {
@@ -55,9 +74,39 @@ const AddExpenses = () => {
     }
   };
 
+  const editNewExpense = (e) => {
+    e.preventDefault();
+    const { value, description, date } = expensesEdit;
+    if (value === '' || description === '' || date === '') {
+      setError(true);
+    } else {
+      setError(false);
+      editExpense(e, expensesEdit);
+      navigate('/listado-gastos');
+    }
+  };
+
+  useEffect(() => {
+    //Compruebo si hay algún gasto.
+    //De ser así establezco todo el state con los valores del gasto.
+    if (expense && expense.idUser === idUser) {
+      setValues({
+        value: expense.value,
+        description: expense.description,
+        category: expense.category.id,
+      });
+      setCategory({ id: expense.category.id, text: expense.category.text });
+      setDate(fromUnixTime(expense.date));
+    } else {
+      navigate('/');
+    }
+  }, [expense, idUser, navigate, setValues]);
+
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={expense ? (e) => editNewExpense(e) : handleSubmit}>
       {error && <Alert type="error" msg="Los campos son obligatorios" />}
+      {success && <Alert type="exito" msg="producto agregado" />}
+
       <ContainerFilters>
         <SelectCategories category={category} setCategory={setCategory} />
         <DatePicker currentDate={date} setDate={setDate} />
@@ -83,7 +132,7 @@ const AddExpenses = () => {
       <ContainerButton>
         {!loading ? (
           <Button as="button" type="submit" primary conIcono>
-            Agregar Gasto
+            {expense ? 'Editar gasto' : 'Agregar gasto'}
             <IoMdAdd />
           </Button>
         ) : (
