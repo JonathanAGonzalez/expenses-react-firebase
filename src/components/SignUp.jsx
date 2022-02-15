@@ -17,7 +17,7 @@ const Svg = styled(SvgRegister)`
 const SignUp = () => {
   const { errorFirebase, values, error, handleSubmit, handleChange } =
     useForm();
-  const { email, password, passwordConfirm } = values;
+  const { email, password, passwordConfirm, name } = values;
 
   return (
     <>
@@ -40,9 +40,18 @@ const SignUp = () => {
           onChange={handleChange}
           value={email}
         />
+        {error.email && <Error msg={error.email} />}
         {errorFirebase && <Alert type="error" msg={errorFirebase} />}
 
-        {error.email && <Error msg={error.email} />}
+        <Input
+          type="text"
+          name="name"
+          placeholder="Nombre completo"
+          onChange={handleChange}
+          value={name}
+        />
+        {error.name && <Error msg={error.name} />}
+
         <Input
           type="password"
           name="password"

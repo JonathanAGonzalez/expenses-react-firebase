@@ -10,8 +10,6 @@ import {
   List,
   ElementList,
   ContainerLoading,
-  ListaDeCategorias,
-  ElementoListaCategorias,
   Category,
   Description,
   Value,
@@ -37,8 +35,6 @@ const ListExpenses = () => {
     moreToLoad,
     getMoreExpenses,
   } = useGetExpenses();
-
-  //console.log(data);
 
   return (
     <>

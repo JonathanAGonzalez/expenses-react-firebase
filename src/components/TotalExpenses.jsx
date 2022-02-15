@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import formattedPrice from '../hooks/formattedPrice';
-
+import useGetExpensesOfTheMonth from '../hooks/useGetExpensesOfTheMonth';
 const BarTotal = styled.div`
   background: #222;
   font-size: 1.25rem; /* 20px */
@@ -21,10 +21,15 @@ const BarTotal = styled.div`
 `;
 
 const TotalExpenses = () => {
+  const expenses = useGetExpensesOfTheMonth();
+  const total = expenses.reduce((ac, curr) => {
+    const currentValue = Number(curr.value);
+    return ac + currentValue;
+  }, 0);
   return (
     <BarTotal>
       <p>Total gastado en el mes:</p>
-      <p>{formattedPrice(200)}</p>
+      <p>{formattedPrice(total)}</p>
     </BarTotal>
   );
 };

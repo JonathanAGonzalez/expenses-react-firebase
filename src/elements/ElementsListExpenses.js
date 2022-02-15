@@ -44,14 +44,14 @@ const ElementList = styled.li`
   }
 `;
 
-const ListaDeCategorias = styled.ul`
+const ListOfCategory = styled.ul`
   list-style: none;
   padding: 0 2.5rem; /* 40px */
   height: 100%;
   overflow-y: auto;
 `;
 
-const ElementListCategorias = styled.li`
+const ElementListCategories = styled.li`
   padding: 1.25rem 0; /* 20px */
   border-bottom: 2px solid #f2f2f2;
   display: flex;
@@ -202,8 +202,8 @@ const ButtonMore = styled.button`
 export {
   List,
   ElementList,
-  ListaDeCategorias,
-  ElementListCategorias,
+  ListOfCategory,
+  ElementListCategories,
   Category,
   Description,
   Value,

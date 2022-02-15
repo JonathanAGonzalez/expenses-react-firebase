@@ -16,7 +16,7 @@ const initialState = {
 
 const useForm = (valuesForm = initialState) => {
   const [values, setValues] = useState(valuesForm);
-  const { email, password, passwordConfirm } = values;
+  const { email, name, password, passwordConfirm } = values;
   const [error, setError] = useState({});
   const [errorFirebase, setErrorFirebase] = useState('');
 
@@ -32,6 +32,7 @@ const useForm = (valuesForm = initialState) => {
 
     const { isValid, errors } = SignUpValidation(
       email,
+      name,
       password,
       passwordConfirm
     );
@@ -70,7 +71,6 @@ const useForm = (valuesForm = initialState) => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      //const user = { id: response.user.uid, user: response.user.email };
       navigate('/');
     } catch ({ code }) {
       if (code === 'auth/user-not-found') {
