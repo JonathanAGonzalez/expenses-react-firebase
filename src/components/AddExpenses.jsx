@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import getUnixTime from 'date-fns/getUnixTime';
 import { IoMdAdd } from 'react-icons/io';
+import getUnixTime from 'date-fns/getUnixTime';
 import {
   ContainerFilters,
   Form,
@@ -20,9 +20,8 @@ import { useNavigate } from 'react-router-dom';
 import editExpense from '../firesbase/editExpense';
 import fromUnixTime from 'date-fns/fromUnixTime';
 
-const dateNew = new Date();
-
 const AddExpenses = ({ expense }) => {
+  const dateNew = new Date();
   const idUser = useUserContext().stateUserContext.uid;
   const [category, setCategory] = useState({ id: 'home', text: 'Hogar' });
   const [date, setDate] = useState(dateNew);
@@ -46,6 +45,7 @@ const AddExpenses = ({ expense }) => {
     id: expense?.id,
   };
 
+  //Agrego gasto.
   const handleSubmit = (e) => {
     e.preventDefault();
     const expenses = { ...values, category, date: getUnixTime(date), idUser };
@@ -74,6 +74,7 @@ const AddExpenses = ({ expense }) => {
     }
   };
 
+  //Editar gasto.
   const editNewExpense = (e) => {
     e.preventDefault();
     const { value, description, date } = expensesEdit;
@@ -88,7 +89,7 @@ const AddExpenses = ({ expense }) => {
 
   useEffect(() => {
     //Compruebo si hay algún gasto.
-    //De ser así establezco todo el state con los valores del gasto.
+    //De ser así, establezco todo el state con los valores del gasto.
     if (expense && expense.idUser === idUser) {
       setValues({
         value: expense.value,
@@ -96,6 +97,7 @@ const AddExpenses = ({ expense }) => {
         category: expense.category.id,
       });
       setCategory({ id: expense.category.id, text: expense.category.text });
+
       setDate(fromUnixTime(expense.date));
     } else {
       navigate('/');

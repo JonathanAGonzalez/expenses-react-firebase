@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
 import useForm from '../hooks/useForm';
-import styled from 'styled-components';
 import Button from '../elements/Button';
 import Alert from '../elements/Alert';
 import Error from '../elements/WarningForm';
@@ -15,9 +15,12 @@ const Svg = styled(SvgRegister)`
 `;
 
 const SignUp = () => {
+  //obtengo valores del formulario con el custom hook
   const { errorFirebase, values, error, handleSubmit, handleChange } =
     useForm();
-  const { email, password, passwordConfirm, name } = values;
+
+  //Destructuro los valores para enviarlos a los inputs
+  const { email, password, passwordConfirm } = values;
 
   return (
     <>
@@ -42,15 +45,6 @@ const SignUp = () => {
         />
         {error.email && <Error msg={error.email} />}
         {errorFirebase && <Alert type="error" msg={errorFirebase} />}
-
-        <Input
-          type="text"
-          name="name"
-          placeholder="Nombre completo"
-          onChange={handleChange}
-          value={name}
-        />
-        {error.name && <Error msg={error.name} />}
 
         <Input
           type="password"

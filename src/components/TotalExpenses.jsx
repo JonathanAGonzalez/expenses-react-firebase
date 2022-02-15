@@ -21,11 +21,14 @@ const BarTotal = styled.div`
 `;
 
 const TotalExpenses = () => {
+  //Obtengo los gastos del mes
   const expenses = useGetExpensesOfTheMonth();
+
   const total = expenses.reduce((ac, curr) => {
     const currentValue = Number(curr.value);
     return ac + currentValue;
   }, 0);
+
   return (
     <BarTotal>
       <p>Total gastado en el mes:</p>

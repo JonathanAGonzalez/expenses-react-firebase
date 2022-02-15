@@ -16,6 +16,7 @@ import './index.css';
 import Background from './elements/Background';
 import { UserContextProvider } from './context/UserContext';
 import ProtectedRoute from './hooks/ProtectedRoute';
+
 WebFont.load({
   google: {
     families: ['Inter:400,600,700', 'sans-serif'],

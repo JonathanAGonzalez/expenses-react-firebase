@@ -20,7 +20,6 @@ const SignIn = () => {
     password: '',
   });
 
-  console.log(error);
   return (
     <>
       <Helmet>

@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { es } from 'date-fns/locale';
 import { DateUtils } from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
+import 'react-day-picker/lib/style.css';
 import theme from '../theme';
 
 const ContainerInput = styled.div`
@@ -33,6 +33,7 @@ const ContainerInput = styled.div`
   }
 `;
 
+//Parseo de la fecha
 function parseDate(str, format) {
   const parsed = dateFnsParse(str, format, new Date(), { locale: es });
   if (DateUtils.isDate(parsed)) {
@@ -41,6 +42,7 @@ function parseDate(str, format) {
   return undefined;
 }
 
+//Formateo de la fecha
 function formatDate(date, format) {
   return dateFnsFormat(date, format, { locale: es });
 }

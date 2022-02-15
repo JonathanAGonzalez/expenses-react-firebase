@@ -16,7 +16,8 @@ const initialState = {
 
 const useForm = (valuesForm = initialState) => {
   const [values, setValues] = useState(valuesForm);
-  const { email, name, password, passwordConfirm } = values;
+  const { email, password, passwordConfirm } = values;
+
   const [error, setError] = useState({});
   const [errorFirebase, setErrorFirebase] = useState('');
 
@@ -32,7 +33,6 @@ const useForm = (valuesForm = initialState) => {
 
     const { isValid, errors } = SignUpValidation(
       email,
-      name,
       password,
       passwordConfirm
     );

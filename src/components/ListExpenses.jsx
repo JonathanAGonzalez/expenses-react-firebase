@@ -1,11 +1,9 @@
-import { Fragment } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { Header, Title } from '../elements/Header';
-import BtnBack from '../elements/BtnBack';
-import TotalExpenses from './TotalExpenses';
+import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
+import { formattedDate, sameDates } from '../hooks/formattedDate';
 import useGetExpenses from '../hooks/useGetExpenses';
-import deleteExpense from '../firesbase/deleteExpense';
+import formattedPrice from '../hooks/formattedPrice';
 import {
   List,
   ElementList,
@@ -21,14 +19,16 @@ import {
   ContainerSub,
   Subtitle,
 } from '../elements/ElementsListExpenses';
+import { Header, Title } from '../elements/Header';
+import BtnBack from '../elements/BtnBack';
 import Loading from '../elements/Loading';
 import IconCategory from '../elements/IconCategory';
-import formattedPrice from '../hooks/formattedPrice';
-import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import Button from '../elements/Button';
-import { formattedDate, sameDates } from '../hooks/formattedDate';
+import deleteExpense from '../firesbase/deleteExpense';
+import TotalExpenses from './TotalExpenses';
 
 const ListExpenses = () => {
+  //Obtengo todos los gastos con el custom hook.
   const {
     expenses: { loading },
     expenses: data,

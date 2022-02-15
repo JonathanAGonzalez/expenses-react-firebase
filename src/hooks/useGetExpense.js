@@ -4,7 +4,9 @@ import { db, getDoc, doc } from '../firesbase/firebaConfig';
 
 const useGetExpense = (id) => {
   const [expense, setExpense] = useState({ loading: true, data: null });
+
   const navigate = useNavigate();
+
   useEffect(() => {
     async function getExpense() {
       const docExpense = await getDoc(doc(db, 'expenses', id));
