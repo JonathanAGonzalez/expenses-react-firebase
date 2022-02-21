@@ -11,10 +11,11 @@ import {
   TitleForm,
   ContainerForm,
 } from '../../elements/ElementsForm';
+import Loading from '../../components/Loading';
 
 const SignUp = () => {
   //obtengo valores del formulario con el custom hook
-  const { errorFirebase, values, error, handleSubmit, handleChange } =
+  const { errorFirebase, values, error, loading, handleSubmit, handleChange } =
     useForm();
 
   //Destructuro los valores para enviarlos a los inputs
@@ -71,7 +72,11 @@ const SignUp = () => {
           />
           {error.passwordConfirm && <Error msg={error.passwordConfirm} />}
 
-          <InputForm value="Crear cuenta" type="submit" bgBlack fontWhite />
+          {loading ? (
+            <Loading />
+          ) : (
+            <InputForm value="Crear cuenta" type="submit" bgBlack fontWhite />
+          )}
 
           <ParagraphForm block fontBlack>
             Ya tenés cuenta?,{' '}

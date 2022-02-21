@@ -11,12 +11,14 @@ import {
 } from '../../elements/ElementsForm';
 import Error from '../../elements/WarningForm';
 import Alert from '../../components/Alert';
+import Loading from '../../components/Loading';
 
 const SignIn = () => {
-  const { values, errorFirebase, error, handleChange, loginUser } = useForm({
-    email: '',
-    password: '',
-  });
+  const { values, errorFirebase, error, loading, handleChange, loginUser } =
+    useForm({
+      email: '',
+      password: '',
+    });
 
   return (
     <>
@@ -58,7 +60,11 @@ const SignIn = () => {
             input={values.password}
           />
 
-          <InputForm value="Iniciar Sesión" type="submit" bgBlack fontWhite />
+          {loading ? (
+            <Loading />
+          ) : (
+            <InputForm value="Iniciar Sesión" type="submit" bgBlack fontWhite />
+          )}
 
           <ParagraphForm block fontBlack>
             No tenés cuenta?,{' '}

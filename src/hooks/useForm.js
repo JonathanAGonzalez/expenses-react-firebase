@@ -17,7 +17,7 @@ const initialState = {
 const useForm = (valuesForm = initialState) => {
   const [values, setValues] = useState(valuesForm);
   const { email, password, passwordConfirm } = values;
-
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
   const [errorFirebase, setErrorFirebase] = useState('');
 
@@ -44,6 +44,7 @@ const useForm = (valuesForm = initialState) => {
     }
 
     try {
+      setLoading(true);
       await createUserWithEmailAndPassword(auth, email, password);
       navigate('/');
     } catch ({ code }) {
@@ -69,10 +70,10 @@ const useForm = (valuesForm = initialState) => {
     }
 
     try {
+      setLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/');
     } catch ({ code }) {
-      console.log(code);
       switch (code) {
         case 'auth/user-not-found':
           setErrorFirebase('El usuario no existe');
@@ -106,6 +107,7 @@ const useForm = (valuesForm = initialState) => {
     errorFirebase,
     values,
     error,
+    loading,
     handleSubmit,
     handleChange,
     loginUser,

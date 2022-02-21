@@ -15,6 +15,10 @@ function Home() {
   return (
     <>
       <Helmet>
+        <meta
+          name="description"
+          content="Esta aplicación te va a servir para organizar tus gatos"
+        />
         <title>Bienvenido {stateUserContext.email}</title>
       </Helmet>
       <Header>
