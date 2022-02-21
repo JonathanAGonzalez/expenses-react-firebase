@@ -1,21 +1,13 @@
 import { useState } from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
+import { categories } from '../../data/categories';
 import {
   ContainerSelect,
   Option,
   Options,
   OptionSelect,
-} from './ElementsOptions';
-import IconCategory from './IconCategory';
-
-const categories = [
-  { id: 'food', text: 'Comida' },
-  { id: 'billsPayments', text: 'Cuentas-pagos' },
-  { id: 'home', text: 'Hogar' },
-  { id: 'transport', text: 'Transporte' },
-  { id: 'healt', text: 'Salud e Higiene' },
-  { id: 'buys', text: 'Compras' },
-];
+} from '../../elements/ElementsOptions';
+import IconCategory from '../../elements/IconCategory';
 
 const SelectCategories = ({ category, setCategory }) => {
   const [showSelect, setShowSelect] = useState(false);

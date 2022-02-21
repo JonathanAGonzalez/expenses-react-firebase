@@ -21,7 +21,7 @@ import {
 } from '../../elements/ElementsListExpenses';
 import { Header, Title } from '../../elements/Header';
 import BtnBack from '../../elements/BtnBack';
-import Loading from '../../elements/Loading';
+import Loading from '../../components/Loading';
 import IconCategory from '../../elements/IconCategory';
 import Button from '../../elements/Button';
 import deleteExpense from '../../firesbase/deleteExpense';

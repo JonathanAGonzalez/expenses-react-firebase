@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import theme from '../theme';
+import theme from '../../theme';
 const slideDown = keyframes`
     0% {
         transform: translateY(-1.25rem); /* 20px */

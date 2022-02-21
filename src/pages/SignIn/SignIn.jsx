@@ -10,7 +10,7 @@ import {
   AnchorForm,
 } from '../../elements/ElementsForm';
 import Error from '../../elements/WarningForm';
-import Alert from '../../elements/Alert';
+import Alert from '../../components/Alert';
 
 const SignIn = () => {
   const { values, errorFirebase, error, handleChange, loginUser } = useForm({
@@ -27,16 +27,17 @@ const SignIn = () => {
         {errorFirebase && <Alert type="error" msg={errorFirebase} />}
 
         <LeftForm>
-          <TitleForm block>Welcome</TitleForm>
+          <TitleForm block>Te damos la bienvenida!</TitleForm>
           <ParagraphForm fontWhite fontLarge>
-            The app is perfect for keeping track of your expenses.
+            La aplicación es muy buena para realizar un seguimiento de tus
+            gastos.
           </ParagraphForm>
         </LeftForm>
 
         <Form onSubmit={loginUser}>
-          <TitleForm block>LOGIN</TitleForm>
+          <TitleForm block>Iniciar sesión</TitleForm>
           <ParagraphForm fontLarge>
-            Welcome! Sign in to add your expenses
+            Para agregar tus gastos, vas a tener que iniciar sesión
           </ParagraphForm>
 
           {error.email && <Error msg={error.email} mobile />}

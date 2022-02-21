@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import useForm from '../../hooks/useForm';
-import Alert from '../../elements/Alert';
+import Alert from '../../components/Alert';
 import Error from '../../elements/WarningForm';
 import {
   InputForm,
@@ -30,16 +30,17 @@ const SignUp = () => {
         {errorFirebase && <Alert type="error" msg={errorFirebase} />}
 
         <LeftForm>
-          <TitleForm block>Welcome</TitleForm>
+          <TitleForm block>Te damos la bienvenida!</TitleForm>
           <ParagraphForm fontWhite fontLarge>
-            The app is perfect for keeping track of your expenses.
+            La aplicación es muy buena para realizar un seguimiento de tus
+            gastos.
           </ParagraphForm>
         </LeftForm>
 
         <Form onSubmit={handleSubmit}>
-          <TitleForm block>Create Account</TitleForm>
+          <TitleForm block>Crear cuenta</TitleForm>
           <ParagraphForm fontLarge>
-            Welcome! create account to add your expenses
+            Crea tu cuenta con solo unos pocos datos
           </ParagraphForm>
 
           <InputForm

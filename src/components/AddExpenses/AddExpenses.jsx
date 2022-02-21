@@ -15,9 +15,9 @@ import ElementListExpenses, {
 import { ContainerSelectOptions } from '../../elements/ElementsOptions';
 import { TextArea } from '../../elements/ElementsForm';
 import Button from '../../elements/Button';
-import Loading from '../../elements/Loading';
-import Alert from '../../elements/Alert';
-import SelectCategories from '../../elements/SelectCategories';
+import Loading from '../../components/Loading';
+import Alert from '../Alert';
+import SelectCategories from '../../components/SelectCategories';
 import DatePicker from '../DatePicker';
 import useForm from '../../hooks/useForm';
 import useUserContext from '../../hooks/useUserContext';

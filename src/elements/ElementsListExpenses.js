@@ -194,7 +194,7 @@ const ButtonMore = styled.button`
   transition: 0.3s ease all;
 
   &:hover {
-    background: #e0607e;
+    background: ${theme.purpleStrong};
     color: white;
   }
 `;

@@ -11,7 +11,7 @@ const loadingAnimation = keyframes`
 
 `;
 
-export const ContainerLoading = styled.div`
+const ContainerLoading = styled.div`
   position: relative;
   div {
     width: 82px;
@@ -31,13 +31,4 @@ export const ContainerLoading = styled.div`
   }
 `;
 
-const Loading = () => {
-  return (
-    <ContainerLoading>
-      <div></div>
-      <p>Cargando...</p>
-    </ContainerLoading>
-  );
-};
-
-export default Loading;
+export default ContainerLoading;

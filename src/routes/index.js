@@ -3,7 +3,7 @@ import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { UserContextProvider } from '../context/UserContext';
 import favicon from '../assets/images/logo.png';
 import WebFont from 'webfontloader';
-import EditExpenses from '../components/EditExpenses';
+import EditExpenses from '../pages/EditExpenses';
 import SignUp from '../pages/SignUp';
 import SignIn from '../pages/SignIn';
 import Container from '../elements/Container';
