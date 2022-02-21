@@ -1,27 +1,38 @@
-import styled from "styled-components";
-import theme from "../theme";
+import styled from 'styled-components';
+import theme from '../theme';
 
 export const ContainerSelect = styled.div`
-  background: ${theme.lightGray};
+  background: ${theme.grayStrong};
   cursor: pointer;
+  color: ${theme.white};
   border-radius: 0.625rem; /* 10px */
   position: relative;
   height: 5rem; /* 80px */
-  width: 40%;
+  width: 100%;
   padding: 0px 1.25rem; /* 20px */
   font-size: 1.5rem; /* 24px */
   text-align: center;
   display: flex;
   align-items: center;
   transition: 0.5s ease all;
+  margin-top: 0.5rem;
   &:hover {
-    background: ${theme.minLightGray};
+    background: ${theme.purpleStrong};
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+export const ContainerSelectOptions = styled.div`
+  width: 100%;
+  @media screen and (min-width: 48rem) {
+    width: 40%;
   }
 `;
 
 export const OptionSelect = styled.div`
   width: 100%;
-  text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,7 +44,8 @@ export const OptionSelect = styled.div`
 `;
 
 export const Options = styled.div`
-  background: ${theme.lightGray};
+  color: ${theme.white};
+  background: ${theme.grayStrong};
   position: absolute;
   top: 5.62rem; /* 90px */
   left: 0;
@@ -41,6 +53,7 @@ export const Options = styled.div`
   border-radius: 0.625rem; /* 10px */
   max-height: 18.75rem; /* 300px */
   overflow-y: auto;
+  z-index: 100;
 `;
 
 export const Option = styled.div`
@@ -52,6 +65,6 @@ export const Option = styled.div`
     margin-right: 1.25rem; /* 20px */
   }
   &:hover {
-    background: ${theme.minLightGray};
+    background: ${theme.purpleStrong};
   }
 `;

@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import theme from '../theme';
 
 const loadingAnimation = keyframes`
     from{
@@ -15,9 +16,9 @@ export const ContainerLoading = styled.div`
   div {
     width: 82px;
     height: 82px;
-    border-top: 2px solid #e0607e;
-    border-left: 2px solid #e0607e;
-    border-bottom: 1px solid #e0607e;
+    border-top: 2px solid ${theme.purple};
+    border-left: 2px solid ${theme.purple};
+    border-bottom: 1px solid ${theme.purple};
     border-radius: 50%;
     animation: ${loadingAnimation} 1s linear infinite;
   }
@@ -26,7 +27,7 @@ export const ContainerLoading = styled.div`
     top: calc(50% - 14px / 2);
     font-size: 14px;
     left: 3px;
-    color: #e0607e;
+    color: ${theme.purpleStrong};
   }
 `;
 

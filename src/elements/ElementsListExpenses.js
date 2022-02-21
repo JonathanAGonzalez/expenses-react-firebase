@@ -1,17 +1,17 @@
 import styled from 'styled-components';
+import theme from '../theme';
 
 const List = styled.ul`
   list-style: none;
-  padding: 0 2.5rem; /* 40px */
+  padding: 0 2.5rem;
   height: 100%;
   overflow-y: auto;
-
+  width: 100%;
   li {
     grid-template-columns: 1fr 1fr 1fr auto;
   }
 
-  @media (max-width: 50rem) {
-    /*80px*/
+  @media (max-width: 48rem) {
     li {
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
@@ -44,10 +44,11 @@ const ElementList = styled.li`
   }
 `;
 
-const ListOfCategory = styled.ul`
+const ListCategory = styled.ul`
   list-style: none;
   padding: 0 2.5rem; /* 40px */
   height: 100%;
+  width: 100%;
   overflow-y: auto;
 `;
 
@@ -73,7 +74,6 @@ const Category = styled.div`
   }
 
   @media (max-width: 50rem) {
-    /* 80px */
     font-size: 1.12rem;
   }
 `;
@@ -82,8 +82,7 @@ const Description = styled.div`
   justify-content: center;
   font-size: 1.25rem;
   text-transform: capitalize;
-  @media (max-width: 50rem) {
-    /* 50px */
+  @media (max-width: 48rem) {
     justify-content: end;
   }
 `;
@@ -101,7 +100,7 @@ const Value = styled.div`
 
 const Date = styled.div`
   border-radius: 0.31rem; /* 5px */
-  background: #e0607e;
+  background: ${theme.purpleStrong};
   text-align: center;
   color: #fff;
   padding: 0.62rem 3.12rem; /* 10px 50px */
@@ -125,6 +124,7 @@ const ButtonAction = styled.button`
   outline: none;
   background: #f3f3f3;
   border: none;
+  color: ${theme.purpleStrong};
   width: 2.5rem; /* 40px */
   display: inline-block;
   height: 2.5rem; /* 40px */
@@ -140,7 +140,7 @@ const ButtonAction = styled.button`
   opacity: 0;
 
   &:hover {
-    background: #e0607e;
+    background: ${theme.purple};
     color: white;
   }
 
@@ -202,7 +202,7 @@ const ButtonMore = styled.button`
 export {
   List,
   ElementList,
-  ListOfCategory,
+  ListCategory,
   ElementListCategories,
   Category,
   Description,

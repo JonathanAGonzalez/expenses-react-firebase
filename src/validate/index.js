@@ -2,18 +2,20 @@ import validate from 'validate.js';
 
 export const SignUpValidation = (email, password, passwordConfirm) => {
   const validationErrors = {};
-  const validateEmail = validate.single(email, { presence: true, email: true });
+  const notValidateEmail = validate.single(email, {
+    presence: true,
+    email: true,
+  });
 
-  const validatePassword = validate.single(password, {
+  const notValidatePassword = validate.single(password, {
     presence: true,
     length: { minimum: 6, maximum: 30 },
   });
 
-  if (validateEmail) {
+  if (notValidateEmail) {
     validationErrors.email = 'El correo electronico no es valido';
   }
-
-  if (validatePassword) {
+  if (notValidatePassword) {
     validationErrors.password =
       'La contraseña debe ser entre 6 y 30 caracteres';
   }
@@ -30,17 +32,22 @@ export const SignUpValidation = (email, password, passwordConfirm) => {
 
 export const SignInValidation = (email, password) => {
   const validationErrors = {};
-  const validateEmail = validate.single(email, { presence: true, email: true });
-  const validatePassword = validate.single(password, {
+
+  const notValidateEmail = validate.single(email, {
+    presence: true,
+    email: true,
+  });
+
+  const notValidatePassword = validate.single(password, {
     presence: true,
     length: { minimum: 6, maximum: 30 },
   });
 
-  if (validateEmail) {
+  if (notValidateEmail) {
     validationErrors.email = 'El correo electronico no es valido';
   }
 
-  if (validatePassword) {
+  if (notValidatePassword) {
     validationErrors.password =
       'La contraseña debe ser entre 6 y 30 caracteres';
   }

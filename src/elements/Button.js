@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import theme from '../theme';
 
 const Button = styled(Link)`
   background: ${(props) => (props.primario ? '#5B69E2' : '#303036')};
@@ -19,13 +20,17 @@ const Button = styled(Link)`
   align-items: center;
   outline: none;
   transition: 0.5s;
+  margin: 1rem 0;
   &:hover {
-    background: #e0607e;
+    background: ${theme.purple};
+  }
+  svg {
+    height: ${(props) => (props.bigIcon ? '100%' : '0.75rem;')}; /* 12px */
+    fill: white;
   }
 
-  svg {
-    height: ${(props) => (props.iconoGrande ? '100%' : '0.75rem;')}; /* 12px */
-    fill: white;
+  @media screen and (max-width: 48rem) {
+    display: block;
   }
 `;
 

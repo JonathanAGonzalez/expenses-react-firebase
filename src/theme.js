@@ -7,6 +7,10 @@ const theme = {
   lightGray: '#E8EFF1',
   minLightGray: '#CBDDE2',
   lightBlue: '#8792F1',
+  white: '#f3f3f3',
+  grayStrong: '#222',
+  purple: '#AC4AF7',
+  purpleStrong: '#6A1B9A',
 };
 
 export default theme;

@@ -36,7 +36,6 @@ const useForm = (valuesForm = initialState) => {
       password,
       passwordConfirm
     );
-
     setError({});
 
     if (!isValid) {
@@ -73,10 +72,23 @@ const useForm = (valuesForm = initialState) => {
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/');
     } catch ({ code }) {
-      if (code === 'auth/user-not-found') {
-        setErrorFirebase('El usuario no existe');
-      } else {
-        console.log('Ocurrio un error inesperado');
+      console.log(code);
+      switch (code) {
+        case 'auth/user-not-found':
+          setErrorFirebase('El usuario no existe');
+          break;
+
+        case 'auth/wrong-password':
+          setErrorFirebase('La contraseña es incorrecta');
+          break;
+
+        case 'auth/too-many-requests':
+          setErrorFirebase('Demasiados intentos fallidos, intente mas tarde');
+          break;
+
+        default:
+          console.log('Ocurrio un error inesperado');
+          break;
       }
     }
   };

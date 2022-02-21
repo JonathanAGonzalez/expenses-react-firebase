@@ -1,39 +1,37 @@
 import styled from 'styled-components';
 import { IoIosArrowDropleftCircle } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
+import theme from '../theme';
+
 const Btn = styled.button`
-  display: block;
-  width: 3.12rem;
-  height: 3.12rem;
-  line-height: 3.12rem;
-  text-align: center;
-  margin-right: 1.25rem;
-  border: none;
-  background: #303036;
-  color: #fffaff;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 0.31rem;
+  color: ${theme.white};
   cursor: pointer;
-  @media (max-width: 60rem) {
-    width: 2.5rem;
-    height: 2.5rem;
-    line-height: 2.5rem;
+  gap: 1rem;
+  border: none;
+  border-radius: 0.31rem;
+  padding: 1rem 2rem;
+  background: ${theme.grayStrong};
+  transition: ease 0.6s;
+  &:hover {
+    background: ${theme.purpleStrong};
   }
 `;
 
 const Icon = styled(IoIosArrowDropleftCircle)`
-  width: 50%;
+  width: 2rem;
   height: auto;
-  fill: #fff;
+  fill: ${theme.white};
 `;
 
-const BtnBack = ({ route = '/' }) => {
+const BtnBack = ({ route = '/', text }) => {
   const navigate = useNavigate();
+
   return (
     <Btn onClick={() => navigate(route)}>
       <Icon />
+      {text}
     </Btn>
   );
 };
